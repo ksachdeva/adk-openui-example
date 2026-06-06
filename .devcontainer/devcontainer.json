@@ -1,5 +1,5 @@
 {
-  "name": "python-react-template",
+  "name": "adk-openui-example",
   "dockerFile": "Dockerfile",
   "containerEnv": {
     "LANG": "en_US.UTF-8",
