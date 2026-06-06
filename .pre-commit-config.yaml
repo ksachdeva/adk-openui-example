@@ -1,0 +1,32 @@
+default_language_version:
+  python: python3.14
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-ast
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: debug-statements
+      - id: end-of-file-fixer
+        exclude: (.*\.vscode\/.+json|.+code-workspace)  # vscode </3 LF
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.11
+    hooks:
+      - id: ruff-check
+        args: [--fix, --show-fixes]
+      - id: ruff-format
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.11.7
+    hooks:
+      - id: uv-lock
+  - repo: local
+    hooks:
+    - id: prettier
+      name: prettier (frontend)
+      language: system
+      entry: npm --prefix portal-frontend run format
+      pass_filenames: false
+      files: ^portal-frontend/src/.*\.(js|jsx|ts|tsx|css|md)$

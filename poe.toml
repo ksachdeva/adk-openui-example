@@ -1,0 +1,25 @@
+[tool.poe.tasks]
+fmt = "uv format --preview-features format"
+pre-commit = "uv run pre-commit run --all--files"
+
+[tool.poe.tasks.dev-run-backend]
+help = "Initialise the DB and start the backend service"
+env = { MASTER_ENV_FILE = ".env" }
+sequence = [
+    { cmd = 'printf "\n\033[1;36m▶ Starting backend service\033[0m\n"' },
+    { cmd = "fastapi dev backend/src/backend/main.py" }
+]
+
+[tool.poe.tasks.dev-run-frontend]
+help = "Start the frontend dev server"
+sequence = [
+    { cmd = "npm --prefix frontend run dev"}
+]
+
+[tool.poe.tasks.frontend-build]
+help = "Builds the frontend in prod mode"
+cmd = "npm --prefix frontend run build"
+
+[tool.poe.tasks.frontend-prettier]
+help = "Run prettier on the frontend project"
+cmd = "npm --prefix frontend run format"
