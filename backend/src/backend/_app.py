@@ -3,12 +3,15 @@ from typing import AsyncGenerator
 
 import fastapi
 from fastapi import FastAPI
+from google.adk.models.lite_llm import LiteLlm
 from starlette.middleware.cors import CORSMiddleware
 
 from ._config import BackendConfig, DeploymentMode
+from .agents import SimpleAgent
 from .api import (
     dummy_router,
     health_router,
+    register_simple_agent,
 )
 
 
@@ -42,3 +45,14 @@ class App(fastapi.FastAPI):
 
         self.include_router(health_router)
         self.include_router(dummy_router)
+
+        # create the SimpleAgent and then register it with the app
+        simple_agent = SimpleAgent(
+            llm=LiteLlm(
+                model=config.simple_agent.llm.model_name,
+                **config.simple_agent.llm.provider_args,
+            ),
+            generate_content_config=config.simple_agent.generate_content,
+        )
+
+        register_simple_agent(simple_agent, self)

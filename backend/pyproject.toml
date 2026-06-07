@@ -7,7 +7,9 @@ requires-python = ">=3.14"
 dependencies = [
     "fastapi[standard]>=0.116.1",
     "pydantic-settings>=2.10.1",
-     "dishka>=1.6.0",
+    "dishka>=1.6.0",
+    "ag-ui-adk>=0.6.5",
+    "litellm>=1.88.0",
 ]
 
 [dependency-groups]

@@ -5,6 +5,8 @@ from typing import Annotated, Any
 from pydantic import AnyUrl, BeforeValidator, computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from .agents import AgentConfig
+
 
 class DeploymentMode(str, enum.Enum):
     dev = "dev"
@@ -27,6 +29,8 @@ class BackendConfig(BaseSettings):
         env_ignore_empty=True,
         extra="ignore",
     )
+
+    simple_agent: AgentConfig
 
     frontend_host: str = "http://localhost:5173"
 
