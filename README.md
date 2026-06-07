@@ -1,5 +1,7 @@
 # Google ADK with OpenUI Frontend
 
+> This is a devcontainer based repository so simply open it in vscode & re-open in devcontainer. Everything will be set for you!
+
 This example demonstrates how to build a conversational AI application using Google ADK (Agent Development Kit) as the backend agent framework, exposed via the ag-ui protocol, and consumed by an OpenUI-based frontend.
 
 ## Architecture Overview
@@ -111,30 +113,37 @@ The frontend uses OpenUI's React components with native ag-ui protocol support:
 - `state` - Agent state for maintaining context
 - `context` - Additional context data
 - `tools` - Available tools/functions
-- `forwardedProps` - Properties forwarded from previous interactions
+- `forwardedProps`
 
 **Workaround**: Use the `processMessage` callback instead of `apiUrl` to manually construct the complete payload. See [`frontend/src/App.tsx`](frontend/src/App.tsx) for the implementation. The commented-out `apiUrl` example shows the approach that doesn't work.
 
 ## Getting Started
 
-### Prerequisites
-- Python 3.11+
-- Node.js 18+
-- poe (Python task runner)
-
 ### Running the Application
 
 1. **Start the backend**:
-   ```bash
-   poe dev-run-backend
-   ```
-   This starts the FastAPI server with the ADK agent exposed via ag-ui protocol.
+
+```bash
+# issue this from the root of the repo
+poe dev-run-backend
+```
+
+This starts the FastAPI server with the ADK agent exposed via ag-ui protocol.
 
 2. **Start the frontend**:
-   ```bash
-   poe dev-run-frontend
-   ```
-   This starts the Vite development server with the OpenUI React application.
+
+```bash
+# needed only one time
+cd frontend
+npm install
+```
+
+```bash
+# issue this from the root of the repo
+poe dev-run-frontend
+```
+
+This starts the Vite development server with the OpenUI React application.
 
 3. Open your browser to the frontend URL (typically `http://localhost:5173`)
 
