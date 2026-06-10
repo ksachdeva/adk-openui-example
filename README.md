@@ -119,6 +119,16 @@ The frontend uses OpenUI's React components with native ag-ui protocol support:
 
 ## Getting Started
 
+```bash
+# you would need an API key
+# The example uses litellm (as the provider in Google ADK)
+#
+# Copy the .env.example and adjust the entry to your provider and API key
+# Typical pattern for model is azure/gpt-xx, openai/gpt-xx etc
+# See litellm documentation for your specific LLM provider
+cp .env.example .env
+```
+
 ### Running the Application
 
 1. **Start the backend**:
